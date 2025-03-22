@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotSim", "RobotSim\RobotSim.csproj", "{22CC9655-D5FB-477D-8A33-198C9240B5B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotSimExamples", "RobotSimExamples\RobotSimExamples.csproj", "{FE445BA1-95C5-4F7D-A949-6F75C3D12822}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22CC9655-D5FB-477D-8A33-198C9240B5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22CC9655-D5FB-477D-8A33-198C9240B5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22CC9655-D5FB-477D-8A33-198C9240B5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22CC9655-D5FB-477D-8A33-198C9240B5B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE445BA1-95C5-4F7D-A949-6F75C3D12822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE445BA1-95C5-4F7D-A949-6F75C3D12822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE445BA1-95C5-4F7D-A949-6F75C3D12822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE445BA1-95C5-4F7D-A949-6F75C3D12822}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
