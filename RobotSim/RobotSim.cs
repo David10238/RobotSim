@@ -7,7 +7,8 @@ public static class RobotSim
         var builder = WebApplication.CreateBuilder(args);
         var app = builder.Build();
 
-        app.MapGet("/", () => "Hello World!");
+        app.MapGet("/routine/switch/{newRoutine}", RoutineManager.SwitchRoutine);
+        app.MapGet("/routine/kill", RoutineManager.KillRoutine);
 
         app.Run();
     }

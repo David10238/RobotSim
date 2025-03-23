@@ -20,12 +20,9 @@ public static class RoutineManager
     {
         lock (RoutineLock)
         {
-            if (_routineThread != null)
-            {
-                _killRoutine = true;
-                _routineThread.Join();
-            }
+            _KillRoutine();
 
+            // launch a new thread
             var routineFunction = Routines[newRoutine];
             _routineThread = new Thread(() =>
             {
@@ -42,6 +39,8 @@ public static class RoutineManager
                 _killRoutine = false;
             });
             _routineThread.Start();
+
+            _activeRoutine = newRoutine;
         }
     }
 
@@ -49,6 +48,23 @@ public static class RoutineManager
     {
         lock (RoutineLock)
         {
+            _KillRoutine();
+        }
+    }
+
+    public static string GetActiveRoutine()
+    {
+        lock (RoutineLock)
+        {
+            return _activeRoutine;
+        }
+    }
+
+    private static void _KillRoutine()
+    {
+        lock (RoutineLock)
+        {
+            // make sure thread terminates
             if (_routineThread != null)
             {
                 _killRoutine = true;
@@ -56,6 +72,7 @@ public static class RoutineManager
             }
 
             _routineThread = null;
+            _activeRoutine = "";
         }
     }
 }
