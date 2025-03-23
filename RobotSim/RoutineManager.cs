@@ -1,4 +1,5 @@
-﻿using RobotSim.routine;
+﻿using RobotSim.hardware;
+using RobotSim.routine;
 
 namespace RobotSim;
 
@@ -9,7 +10,9 @@ public static class RoutineManager
 
     private static readonly System.Threading.Lock RoutineLock = new();
     private static Thread? _routineThread;
+    private static Thread? _halThread;
     private static volatile bool _killRoutine = false;
+    private static volatile bool _killHAL = false;
 
     public static void RegisterRoutine(string name, Func<Routine> routineFunc)
     {
@@ -20,7 +23,21 @@ public static class RoutineManager
     {
         lock (RoutineLock)
         {
+            // cleanup the previous routine
             _KillRoutine();
+
+            // startup a new hal
+            HAL.Remake();
+            _halThread = new Thread(() =>
+            {
+                while (!_killHAL)
+                {
+                    HAL.INSTANCE.UpdateSimulation();
+                }
+
+                _killHAL = false;
+            });
+            _halThread.Start();
 
             // launch a new thread
             var routineFunction = Routines[newRoutine];
@@ -73,6 +90,16 @@ public static class RoutineManager
 
             _routineThread = null;
             _activeRoutine = "";
+
+            // make sure HAL terminates
+
+            if (_halThread != null)
+            {
+                _killHAL = true;
+                _halThread.Join();
+            }
+
+            _halThread = null;
         }
     }
 }
